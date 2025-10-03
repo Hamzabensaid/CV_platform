@@ -1,62 +1,81 @@
-from pydantic import BaseModel, EmailStr, Field, validator
+from pydantic import BaseModel, EmailStr, Field, field_validator
 from typing import List, Optional
 from datetime import datetime
+import re
 
-
-
+# --------------------------
+# Submodels
+# --------------------------
 class Education(BaseModel):
-    degree: str
-    school: str
-    year: str
+    degree: Optional[str] = None
+    school: Optional[str] = None
+    year: Optional[str] = None
 
-    @validator('year')
-    def year_must_be_valid(cls, v):
-        if not v.isdigit() or not (1900 <= int(v) <= 2100):
+    @field_validator('year')
+    def year_must_be_valid(cls, v: Optional[str]) -> Optional[str]:
+        if v is not None and (not v.isdigit() or not (1900 <= int(v) <= 2100)):
             raise ValueError("Year must be a valid 4-digit number")
         return v
 
-
 class Experience(BaseModel):
-    title: str
-    company: str
-    duration: str
-    technologies: List[str]
+    title: Optional[str] = None
+    company: Optional[str] = None
+    duration: Optional[str] = None
+    technologies: Optional[List[str]] = []
 
+# --------------------------
+# Base model (used for DB responses)
+# --------------------------
+class CVBase(BaseModel):
+    id: Optional[str] = Field(alias="_id")
+    full_name: Optional[str] = None
+    email: Optional[EmailStr] = None
+    phone: Optional[str] = None
+    location: Optional[str] = None
+    education: Optional[List[Education]] = []
+    experience: Optional[List[Experience]] = []
+    skills: Optional[List[str]] = []
+    languages: Optional[List[str]] = []
+    created_at: Optional[datetime] = None
+    updated_at: Optional[datetime] = None
 
-class CV(BaseModel):
-    id: Optional[str] = Field(alias="_id")  # Maps MongoDB's _id to id
-    full_name: str
-    email: EmailStr
-    phone: str
+    model_config = {
+        "populate_by_name": True,
+        "from_attributes": True,
+        "arbitrary_types_allowed": True,
+    }
 
-    @validator('phone')
-    def validate_phone(cls, v):
+# --------------------------
+# Model for creating/updating (frontend form)
+# --------------------------
+class CVCreateUpdate(BaseModel):
+    full_name: Optional[str] = None
+    email: Optional[EmailStr] = None
+    phone: Optional[str] = None
+    location: Optional[str] = None
+    education: Optional[List[Education]] = []
+    experience: Optional[List[Experience]] = []
+    skills: Optional[List[str]] = []
+    languages: Optional[List[str]] = []
+
+    @field_validator('phone')
+    def validate_phone(cls, v: Optional[str]) -> Optional[str]:
+        if v is None:
+            return v
         pattern = r'^\+?\d[\d\s\-x()]{7,20}$'
         if not re.match(pattern, v):
             raise ValueError("Invalid phone number format")
         return v
 
-
-    location: str
-    education: List[Education]
-    experience: List[Experience]
-    skills: List[str]
-    languages: List[str]
-
-    @validator('skills', 'languages', each_item=True)
-    def not_empty(cls, v):
-        if not v.strip():
-            raise ValueError("Skill or language cannot be empty")
+    @field_validator('skills', 'languages')
+    def validate_each_list(cls, v: Optional[List[str]]) -> Optional[List[str]]:
+        if v is None:
+            return v
+        for item in v:
+            if not isinstance(item, str) or not item.strip():
+                raise ValueError("Skill or language cannot be empty")
         return v
-    created_at: Optional[datetime] = None
-    updated_at: Optional[datetime] = None
 
-    class Config:
-    
-        populate_by_name = True  # Pydantic v2
-        from_attributes = True   # Helps with parsing from MongoDB format
-        allow_population_by_field_name = True
-        arbitrary_types_allowed = True
-        json_encoders = {
-            # Optional: add encoder for ObjectId if needed
-        }
+# --------------------------
+# Model for blank CV (for /new route)
+# --------------------------
