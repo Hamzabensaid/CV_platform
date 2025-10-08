@@ -1,0 +1,90 @@
+.auth-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  position: relative; /* needed for overlay */
+
+  /* background image */
+  background: url('/assets/register-bg.jpg') no-repeat center center fixed;
+  background-size: cover;
+}
+
+/* Dark overlay to improve readability */
+.auth-container::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4); /* adjust opacity if needed */
+  z-index: 1;
+}
+
+.auth-card {
+  position: relative;
+  z-index: 2; /* bring card above overlay */
+  background: rgba(255, 255, 255, 0.92); /* slightly transparent white */
+  padding: 40px 30px;
+  border-radius: 12px;
+  width: 360px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.2);
+  text-align: center;
+}
+
+.auth-card h2 {
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.subtitle {
+  font-size: 0.9rem;
+  color: #666;
+  margin-bottom: 20px;
+}
+
+.form-group {
+  text-align: left;
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  font-weight: 500;
+  margin-bottom: 5px;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 0.95rem;
+}
+
+.btn-primary {
+  width: 100%;
+  padding: 12px;
+  background: #667eea;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btn-primary:hover {
+  background: #5a67d8;
+}
+
+.error-message {
+  color: red;
+  margin-bottom: 10px;
+  font-size: 0.9rem;
+}
+
+.switch-link {
+  margin-top: 15px;
+  font-size: 0.9rem;
+}

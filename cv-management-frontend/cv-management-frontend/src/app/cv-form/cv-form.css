@@ -1,0 +1,62 @@
+.add-cv-container {
+  max-width: 1000px;
+  margin: 40px auto;
+  font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+.card {
+  background: #fff;
+  padding: 30px;
+  border-radius: 16px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+}
+
+.gradient-text {
+  background: linear-gradient(90deg, #3498db, #9b59b6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.form-section {
+  padding: 20px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+  background: #fdfdfd;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.05);
+}
+
+.info-section { border-left: 5px solid #2980b9; }
+.skill-section { border-left: 5px solid #27ae60; }
+.edu-section { border-left: 5px solid #8e44ad; }
+.exp-section { border-left: 5px solid #f39c12; }
+.lang-section { border-left: 5px solid #16a085; }
+.upload-section { border-left: 5px solid #e67e22; }
+
+.required { color: red; font-weight: bold; }
+
+input, select {
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  padding: 10px;
+  transition: 0.3s;
+}
+
+input:focus, select:focus {
+  border-color: #3498db;
+  box-shadow: 0 0 6px rgba(52,152,219,0.4);
+}
+
+.btn {
+  border-radius: 8px;
+  font-size: 14px;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.btn:hover {
+  transform: scale(1.05);
+  opacity: 0.9;
+}
+
+.btn-warning { background: #f39c12; color: #fff; }
+.btn-info { background: #3498db; color: #fff; }
+.btn-secondary { background: #7f8c8d; color: #fff; }

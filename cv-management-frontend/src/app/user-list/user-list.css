@@ -1,0 +1,116 @@
+.user-list-container {
+  max-width: 1200px;
+  margin: 30px auto;
+  padding: 25px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.page-title {
+  font-size: 24px;
+  font-weight: bold;
+  color: #1f2937;
+  margin-bottom: 20px;
+}
+
+.filters {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.search-input, .filter-select {
+  flex: 1;
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+}
+
+.table-wrapper {
+  overflow-x: auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+.user-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.user-table th, .user-table td {
+  padding: 12px 15px;
+  border-bottom: 1px solid #e5e7eb;
+  font-size: 14px;
+  text-align: left;
+}
+
+.user-table th {
+  background: #f3f4f6;
+  font-weight: 600;
+  color: #374151;
+}
+
+.user-table tr:hover {
+  background-color: #f9fafb;
+}
+
+.actions {
+  display: flex;
+  gap: 8px;
+}
+
+.actions-col {
+  width: 240px;
+}
+
+.btn-edit, .btn-delete, .btn-export {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 5px;
+  font-size: 13px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.btn-edit {
+  background: #3b82f6; color: white;
+}
+.btn-edit:hover { background: #2563eb; }
+
+.btn-delete {
+  background: #ef4444; color: white;
+}
+.btn-delete:hover { background: #dc2626; }
+
+.btn-export {
+  background: #10b981; color: white;
+}
+.btn-export:hover { background: #059669; }
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  margin-top: 15px;
+}
+
+.pagination button {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 5px;
+  background: #3b82f6;
+  color: white;
+  cursor: pointer;
+}
+
+.pagination button:disabled {
+  background: #bdc3c7;
+  cursor: not-allowed;
+}
+
+.info-text { color: #4b5563; margin: 1rem 0; text-align: center; }
+.error-text { color: #dc2626; margin: 1rem 0; text-align: center; }

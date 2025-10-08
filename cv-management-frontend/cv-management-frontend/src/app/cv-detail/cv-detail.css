@@ -1,0 +1,200 @@
+.cv-detail-container {
+  max-width: 900px;
+  margin: 20px auto;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.header-card {
+  background: linear-gradient(135deg, #007bff, #6610f2);
+  color: white;
+  border-radius: 12px;
+  margin-bottom: 20px;
+  padding: 30px 20px;
+  text-align: center;
+}
+
+.profile-avatar {
+  font-size: 4rem;
+  margin-bottom: 10px;
+}
+
+.cv-name {
+  font-size: 2.2rem;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.cv-location,
+.cv-email,
+.cv-phone {
+  font-size: 1rem;
+  opacity: 0.9;
+  margin: 2px 0;
+}
+
+.card-section {
+  background: #fff;
+  padding: 20px;
+  margin-bottom: 15px;
+  border-radius: 10px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+}
+
+.collapsible-header {
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.toggle-icon {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.skill-list,
+.language-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.skill-badge,
+.language-badge {
+  background: #f1f1f1;
+  border-radius: 20px;
+  padding: 6px 12px;
+  font-size: 0.9rem;
+}
+
+.language-bar {
+  margin-bottom: 8px;
+}
+
+.language-bar .bar {
+  background: #e0e0e0;
+  border-radius: 10px;
+  height: 8px;
+  margin-top: 3px;
+  overflow: hidden;
+}
+
+.language-bar .fill {
+  background: #007bff;
+  height: 100%;
+  border-radius: 10px;
+}
+
+.education-list li,
+.experience-list li,
+.project-list li,
+.cert-list li {
+  margin-bottom: 10px;
+}
+
+.exp-header {
+  font-weight: 600;
+}
+
+.exp-duration,
+.edu-year {
+  color: #555;
+  font-size: 0.9rem;
+  margin-left: 5px;
+}
+
+.project-list li a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.project-list li a:hover {
+  text-decoration: underline;
+}
+
+.cert-list li i {
+  margin-right: 6px;
+  color: gold;
+}
+
+.quick-actions {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.btn-action {
+  padding: 8px 15px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  color: white;
+  transition: 0.2s;
+}
+
+.btn-action.email {
+  background: #3498db;
+}
+
+.btn-action.pdf {
+  background: #2ecc71;
+}
+
+.btn-action.note {
+  background: #f39c12;
+}
+
+.btn-action:hover {
+  opacity: 0.85;
+}
+
+.btn-edit,
+.btn-delete,
+.btn-export,
+.btn-secondary {
+  margin: 5px;
+  padding: 8px 14px;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  border: none;
+}
+
+.btn-edit {
+  background: #3b82f6;
+  color: #fff;
+}
+
+.btn-edit:hover {
+  background: #2563eb;
+}
+
+.btn-delete {
+  background: #ef4444;
+  color: #fff;
+}
+
+.btn-delete:hover {
+  background: #dc2626;
+}
+
+.btn-export {
+  background: #10b981;
+  color: #fff;
+}
+
+.btn-export:hover {
+  background: #059669;
+}
+
+.btn-secondary {
+  background: #6b7280;
+  color: #fff;
+}
+
+.btn-secondary:hover {
+  background: #4b5563;
+}

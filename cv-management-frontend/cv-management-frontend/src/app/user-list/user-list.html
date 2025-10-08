@@ -1,0 +1,49 @@
+<div class="user-list-container">
+  <h2 class="page-title">👥 User Management</h2>
+
+  <div class="filters">
+    <input type="text" placeholder="Search by name or email" [(ngModel)]="searchTerm" class="search-input"/>
+    <select [(ngModel)]="selectedRole" class="filter-select">
+      <option value="">All Roles</option>
+      <option *ngFor="let role of allRoles" [value]="role">{{ role }}</option>
+    </select>
+  </div>
+
+  <div *ngIf="loading" class="info-text">Loading users...</div>
+  <div *ngIf="error" class="error-text">{{ error }}</div>
+
+  <div *ngIf="!loading && filteredUsers().length" class="table-wrapper">
+    <table class="user-table">
+      <thead>
+        <tr>
+          <th>Full Name</th>
+          <th>Email</th>
+          <th>Role</th>
+          <th class="actions-col">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of paginatedUsers()">
+          <td>{{ user.full_name }}</td>
+          <td>{{ user.email }}</td>
+          <td>{{ user.role }}</td>
+          <td class="actions">
+            <button class="btn-edit" (click)="editUser(user.id)">✏️ Edit</button>
+            <button class="btn-delete" (click)="deleteUser(user.id)">🗑️ Delete</button>
+            <button class="btn-export" (click)="exportSingleUser(user)">📥 Export</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="!loading && filteredUsers().length === 0" class="info-text">
+    No users found.
+  </div>
+
+  <div *ngIf="filteredUsers().length" class="pagination">
+    <button (click)="prevPage()" [disabled]="currentPage===1">⬅ Prev</button>
+    <span>Page {{ currentPage }} / {{ totalPages() }}</span>
+    <button (click)="nextPage()" [disabled]="currentPage===totalPages()">Next ➡</button>
+  </div>
+</div>

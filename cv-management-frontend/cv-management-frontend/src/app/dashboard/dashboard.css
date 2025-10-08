@@ -1,0 +1,243 @@
+/* ===========================
+   Dashboard Layout
+=========================== */
+.dashboard-layout {
+  display: flex;
+  height: 100vh;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  background: #f8f9fc;
+}
+
+/* ===========================
+   Sidebar
+=========================== */
+.sidebar {
+  width: 230px;
+  background: #2c3e50;
+  color: white;
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar .logo {
+  padding: 20px;
+  font-size: 22px;
+  font-weight: bold;
+  text-align: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.sidebar nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar nav ul li a {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 20px;
+  color: #bdc3c7;
+  text-decoration: none;
+  transition: 0.2s;
+}
+
+.sidebar nav ul li a:hover,
+.sidebar nav ul li a.active {
+  background: #34495e;
+  color: #fff;
+}
+
+/* ===========================
+   Main Content
+=========================== */
+.main-content {
+  flex: 1;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+/* ===========================
+   Top Navbar
+=========================== */
+.top-navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #34495e;
+  color: #fff;
+  padding: 12px 20px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.top-navbar .profile {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.btn-logout {
+  background: #e74c3c;
+  border: none;
+  color: white;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.btn-logout:hover {
+  opacity: 0.9;
+}
+
+/* ===========================
+   Summary Cards
+=========================== */
+.metrics-row {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 25px;
+}
+
+.card.summary {
+  flex: 1;
+  text-align: center;
+  padding: 20px;
+  border-radius: 12px;
+  color: white;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+.card-icon {
+  font-size: 2rem;
+  margin-bottom: 8px;
+}
+
+.summary-blue { background: #3498db; }
+.summary-green { background: #2ecc71; }
+.summary-orange { background: #e67e22; }
+.summary-purple { background: #9b59b6; }
+.summary-teal { background: #1abc9c; }
+.summary-gray { background: #7f8c8d; }
+
+/* ===========================
+   Analytics Sections
+=========================== */
+.analytics-section {
+  margin-bottom: 25px;
+}
+
+.analytics-section h2 {
+  margin-bottom: 12px;
+}
+
+/* ===========================
+   List Cards
+=========================== */
+.list-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.list-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #fff;
+  padding: 12px 16px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.list-card .label {
+  font-weight: 500;
+  color: #333;
+}
+
+.list-card .badge {
+  background: #3498db;
+  color: white;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 13px;
+  font-weight: bold;
+}
+
+/* ===========================
+   Progress Bars
+=========================== */
+.progress {
+  flex: 1;
+  margin-left: 15px;
+  height: 8px;
+  background: #ecf0f1;
+  border-radius: 6px;
+}
+
+.progress-bar {
+  height: 8px;
+  background: #3498db;
+  border-radius: 6px;
+}
+
+/* ===========================
+   CV Table
+=========================== */
+.cv-table {
+  background: #fff;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.cv-table table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.cv-table th, .cv-table td {
+  padding: 12px;
+  border-bottom: 1px solid #eee;
+}
+
+.cv-table th {
+  background: #f4f4f4;
+  text-align: left;
+}
+
+.cv-table tr:hover {
+  background: #fafafa;
+}
+
+.skill-badge {
+  display: inline-block;
+  background: #e0f3ff;
+  color: #0077b6;
+  padding: 3px 8px;
+  margin: 2px;
+  border-radius: 12px;
+  font-size: 12px;
+}
+
+/* ===========================
+   Action Buttons
+=========================== */
+.actions button {
+  margin-right: 6px;
+  padding: 6px 10px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.btn-view { background: #3498db; color: white; }
+.btn-edit { background: #f39c12; color: white; }
+.btn-delete { background: #e74c3c; color: white; }
+
+.actions button:hover {
+  opacity: 0.85;
+}

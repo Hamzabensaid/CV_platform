@@ -1,0 +1,112 @@
+<div class="cv-detail-container" *ngIf="!loading && cv; else loadingTpl">
+
+  <!-- Header -->
+  <div class="card header-card text-center">
+    <div class="card-body">
+      <div class="profile-avatar"><i class="bi bi-person-circle"></i></div>
+      <h2 class="cv-name">{{ cv.full_name }}</h2>
+      <p class="cv-location"><i class="bi bi-geo-alt"></i> {{ cv.location || 'N/A' }}</p>
+      <p class="cv-email"><i class="bi bi-envelope"></i> {{ cv.email }}</p>
+      <p class="cv-phone"><i class="bi bi-telephone"></i> {{ cv.phone || 'N/A' }}</p>
+    </div>
+  </div>
+
+  <!-- Quick Actions -->
+  <div class="quick-actions">
+    <button class="btn-action email" (click)="sendEmail()">✉️ Send Email</button>
+    <button class="btn-action pdf" (click)="downloadPDF()">📄 Download PDF</button>
+    <button class="btn-action note" (click)="addNote()">📝 Add Note</button>
+  </div>
+
+  <!-- Skills -->
+  <div class="card-section">
+    <h3 (click)="showSkills = !showSkills" class="collapsible-header">
+      🛠 Skills <span class="toggle-icon">{{ showSkills ? '-' : '+' }}</span>
+    </h3>
+    <div *ngIf="showSkills" class="skill-list">
+      <span *ngFor="let skill of cv.skills" class="skill-badge">{{ skill }}</span>
+    </div>
+  </div>
+
+  <!-- Education -->
+  <div class="card-section">
+    <h3 (click)="showEducation = !showEducation" class="collapsible-header">
+      🎓 Education <span class="toggle-icon">{{ showEducation ? '-' : '+' }}</span>
+    </h3>
+    <ul *ngIf="showEducation" class="education-list">
+      <li *ngFor="let edu of cv.education">
+        <strong>{{ edu.degree }}</strong> - {{ edu.school }}
+        <span class="edu-year">({{ edu.year || 'N/A' }})</span>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Experience -->
+  <div class="card-section">
+    <h3 (click)="showExperience = !showExperience" class="collapsible-header">
+      💼 Experience <span class="toggle-icon">{{ showExperience ? '-' : '+' }}</span>
+    </h3>
+    <ul *ngIf="showExperience" class="experience-list">
+      <li *ngFor="let exp of cv.experience">
+        <div class="exp-header">
+          <strong>{{ exp.title }}</strong> at {{ exp.company }}
+          <span class="exp-duration">({{ exp.years || 'N/A' }} years)</span>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Languages -->
+  <div class="card-section">
+    <h3 (click)="showLanguages = !showLanguages" class="collapsible-header">
+      🗣 Languages <span class="toggle-icon">{{ showLanguages ? '-' : '+' }}</span>
+    </h3>
+    <div *ngIf="showLanguages" class="language-list">
+      <div *ngFor="let lang of cv.languages" class="language-bar">
+        <span>{{ lang.name || lang }}</span>
+        <div class="bar">
+          <div class="fill" [style.width]="lang.level ? lang.level + '%' : '50%'"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Projects -->
+  <div class="card-section" *ngIf="cv.projects?.length">
+    <h3 (click)="showProjects = !showProjects" class="collapsible-header">
+      💡 Projects <span class="toggle-icon">{{ showProjects ? '-' : '+' }}</span>
+    </h3>
+    <ul *ngIf="showProjects" class="project-list">
+      <li *ngFor="let proj of cv.projects">
+        <a *ngIf="proj.link" [href]="proj.link" target="_blank">{{ proj.name }}</a>
+        <span *ngIf="!proj.link">{{ proj.name }}</span>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Certifications -->
+  <div class="card-section" *ngIf="cv.certifications?.length">
+    <h3 (click)="showCertifications = !showCertifications" class="collapsible-header">
+      🏅 Certifications <span class="toggle-icon">{{ showCertifications ? '-' : '+' }}</span>
+    </h3>
+    <ul *ngIf="showCertifications" class="cert-list">
+      <li *ngFor="let cert of cv.certifications">
+        <i *ngIf="cert.icon" [class]="cert.icon"></i> {{ cert.name }}
+      </li>
+    </ul>
+  </div>
+
+  <!-- Back/Edit/Delete/Export -->
+  <div class="text-center mt-4">
+    <button class="btn-secondary" routerLink="/cvs">⬅ Back</button>
+    <button class="btn-edit" (click)="editCV()">Edit</button>
+    <button class="btn-delete" (click)="deleteCV()">Delete</button>
+    <button class="btn-export" (click)="exportCV()">📥 Export CSV</button>
+  </div>
+
+</div>
+
+<ng-template #loadingTpl>
+  <p *ngIf="loading">Loading CV details...</p>
+  <p *ngIf="error">{{ error }}</p>
+</ng-template>

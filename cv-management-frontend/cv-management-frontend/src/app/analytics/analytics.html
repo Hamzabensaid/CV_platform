@@ -1,0 +1,58 @@
+<div class="analytics-container" *ngIf="!loading; else loadingTpl">
+
+  <h2>📊 CV Analytics Dashboard</h2>
+
+  <div *ngIf="error" class="error">{{ error }}</div>
+
+  <!-- Total CVs -->
+  <div class="card summary-card">
+    <h3>Total CVs</h3>
+    <p class="total-count">{{ totalCVs }}</p>
+  </div>
+
+  <!-- Top Skills -->
+  <div class="card">
+    <h3>Top Skills</h3>
+    <div *ngFor="let skill of topSkills" class="bar-container">
+      <span class="bar-label">{{ skill.skill }} ({{ skill.count }})</span>
+      <div class="bar-bg">
+        <div class="bar-fill" [style.width]="getBarWidth(skill.count, getMaxCount(topSkills))"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Top Locations -->
+  <div class="card">
+    <h3>Top Locations</h3>
+    <div *ngFor="let loc of topLocations" class="bar-container">
+      <span class="bar-label">{{ loc.location }} ({{ loc.count }})</span>
+      <div class="bar-bg">
+        <div class="bar-fill" [style.width]="getBarWidth(loc.count, getMaxCount(topLocations))"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Education Distribution -->
+  <div class="card">
+    <h3>Education Distribution</h3>
+    <div *ngFor="let edu of educationDistribution" class="bar-container">
+      <span class="bar-label">{{ edu.degree }} ({{ edu.count }})</span>
+      <div class="bar-bg">
+        <div class="bar-fill" [style.width]="getBarWidth(edu.count, getMaxCount(educationDistribution))"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Experience Stats -->
+  <div class="card">
+    <h3>Experience Levels</h3>
+    <p>Min Years: {{ experienceStats.min_years }}</p>
+    <p>Avg Years: {{ experienceStats.avg_years | number:'1.1-1' }}</p>
+    <p>Max Years: {{ experienceStats.max_years }}</p>
+  </div>
+
+</div>
+
+<ng-template #loadingTpl>
+  <p>Loading analytics...</p>
+</ng-template>

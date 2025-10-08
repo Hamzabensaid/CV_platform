@@ -1,0 +1,66 @@
+<div class="cv-list-container">
+  <div class="cv-list-header">
+    <h2>📄 Candidate CVs</h2>
+    <button class="add-btn" (click)="addNewCV()">➕ Add New CV</button>
+  </div>
+
+  <!-- Filters -->
+  <div class="filters">
+    <input
+      type="text"
+      placeholder="🔍 Search by name, email, or skill"
+      [(ngModel)]="searchTerm"
+      class="search-input"
+    />
+
+    <select [(ngModel)]="selectedSkill" class="filter-select">
+      <option value="">Filter by skill</option>
+      <option *ngFor="let skill of allSkills" [value]="skill">{{ skill }}</option>
+    </select>
+
+    <select [(ngModel)]="selectedLocation" class="filter-select">
+      <option value="">Filter by location</option>
+      <option *ngFor="let loc of allLocations" [value]="loc">{{ loc }}</option>
+    </select>
+  </div>
+
+  <!-- CV Table -->
+  <table class="cv-table">
+    <thead>
+      <tr>
+        <th (click)="sortBy('full_name')">Full Name ⬍</th>
+        <th (click)="sortBy('email')">Email ⬍</th>
+        <th>Skills</th>
+        <th (click)="sortBy('location')">Location ⬍</th>
+        <th class="actions-col">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let cv of paginatedCVs()">
+        <td>{{ cv.full_name }}</td>
+        <td>{{ cv.email }}</td>
+        <td>
+          <span *ngFor="let skill of cv.skills" class="skill-badge">{{ skill }}</span>
+        </td>
+        <td>{{ cv.location }}</td>
+        <td class="actions">
+          <button class="view-btn" (click)="viewCV(cv)">🔍 View</button>
+          <button class="delete-btn" (click)="deleteCV(cv.id!)">🗑 Delete</button>
+          <button class="export-btn" (click)="exportSingleCV(cv)">⬇ Export</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Pagination -->
+  <div class="pagination">
+    <button (click)="prevPage()" [disabled]="currentPage === 1">⬅ Prev</button>
+    <span>Page {{ currentPage }} / {{ totalPages() }}</span>
+    <button (click)="nextPage()" [disabled]="currentPage === totalPages()">Next ➡</button>
+  </div>
+
+  <!-- Empty State -->
+  <p *ngIf="filteredCVs().length === 0" class="empty-message">
+    🚫 No CVs found. Try changing filters or search.
+  </p>
+</div>

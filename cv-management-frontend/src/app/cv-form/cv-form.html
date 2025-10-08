@@ -1,0 +1,100 @@
+<div class="add-cv-container">
+  <div class="card">
+    <h2 class="text-center gradient-text">{{ isEdit ? '✏️ Edit CV' : '📝 Create New CV' }}</h2>
+
+    <form [formGroup]="cvForm" (ngSubmit)="onSubmit()">
+
+      <!-- Personal Info -->
+      <div class="form-section info-section">
+        <h4>👤 Personal Info</h4>
+        <div class="form-grid">
+          <input type="text" placeholder="Full Name" formControlName="full_name">
+          <input type="email" placeholder="Email" formControlName="email">
+          <input type="text" placeholder="Phone" formControlName="phone">
+          <select formControlName="location">
+            <option disabled selected>Select Location</option>
+            <option *ngFor="let loc of locations" [value]="loc">{{ loc }}</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Skills -->
+      <div class="form-section skill-section">
+        <h4>🛠 Skills</h4>
+        <div formArrayName="skills">
+          <div *ngFor="let skill of skillsArray.controls; let i=index" class="dynamic-row">
+            <input [formControlName]="i" placeholder="Skill">
+            <button type="button" (click)="removeSkill(i)">✖</button>
+          </div>
+        </div>
+        <button type="button" (click)="addSkill()">+ Add Skill</button>
+      </div>
+
+      <!-- Education -->
+      <div class="form-section edu-section">
+        <h4>🎓 Education</h4>
+        <div formArrayName="education">
+          <div *ngFor="let edu of educationArray.controls; let i=index" [formGroupName]="i" class="dynamic-row">
+            <input formControlName="degree" placeholder="Degree">
+            <input formControlName="school" placeholder="School">
+            <input formControlName="level" placeholder="Level">
+            <input formControlName="year" placeholder="Year">
+            <button type="button" (click)="removeEducation(i)">✖</button>
+          </div>
+        </div>
+        <button type="button" (click)="addEducation()">+ Add Education</button>
+      </div>
+
+      <!-- Experience -->
+      <div class="form-section exp-section">
+        <h4>💼 Experience</h4>
+        <div formArrayName="experience">
+          <div *ngFor="let exp of experienceArray.controls; let i=index" [formGroupName]="i" class="dynamic-row">
+            <input formControlName="title" placeholder="Job Title">
+            <input formControlName="company" placeholder="Company">
+            <input formControlName="years" placeholder="Years">
+
+            <!-- Technologies -->
+            <div formArrayName="technologies" class="tech-row">
+              <div *ngFor="let tech of getTechnologiesArray(i).controls; let j=index" class="dynamic-row">
+                <input [formControlName]="j" placeholder="Technology">
+                <button type="button" (click)="removeTechnology(i, j)">✖</button>
+              </div>
+              <button type="button" (click)="addTechnology(i)">+ Add Tech</button>
+            </div>
+
+            <button type="button" (click)="removeExperience(i)">Remove Experience</button>
+          </div>
+        </div>
+        <button type="button" (click)="addExperience()">+ Add Experience</button>
+      </div>
+
+      <!-- Languages -->
+      <div class="form-section lang-section">
+        <h4>🌍 Languages</h4>
+        <div formArrayName="languages">
+          <div *ngFor="let lang of languagesArray.controls; let i=index" class="dynamic-row">
+            <input [formControlName]="i" placeholder="Language">
+            <button type="button" (click)="removeLanguage(i)">✖</button>
+          </div>
+        </div>
+        <button type="button" (click)="addLanguage()">+ Add Language</button>
+      </div>
+
+      <!-- Upload -->
+      <div class="form-section upload-section">
+        <h4>📎 Upload CV</h4>
+        <input type="file" (change)="onFileChange($event)">
+      </div>
+
+      <!-- Actions -->
+      <div class="text-center mt-4">
+        <button type="submit" class="btn btn-success">{{ loading ? 'Saving...' : '💾 Save CV' }}</button>
+        <button type="button" class="btn btn-info" (click)="exportJSON()">📤 Export JSON</button>
+        <button type="button" class="btn btn-warning" (click)="exportPDF()">📄 Export PDF</button>
+        <button type="button" class="btn btn-secondary" (click)="resetForm()">🔄 Reset</button>
+      </div>
+
+    </form>
+  </div>
+</div>

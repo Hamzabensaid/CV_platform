@@ -1,0 +1,139 @@
+<div class="dashboard-layout">
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="logo">⚡ CV Manager</div>
+    <nav>
+      <ul>
+        <li><a routerLink="/dashboard" routerLinkActive="active"><i class="bi bi-speedometer2"></i> Dashboard</a></li>
+        <li><a routerLink="/cvs" routerLinkActive="active"><i class="bi bi-file-earmark-person"></i> CVs</a></li>
+        <li><a routerLink="/analytics" routerLinkActive="active"><i class="bi bi-bar-chart"></i> Analytics</a></li>
+        <li><a routerLink="/users" routerLinkActive="active"><i class="bi bi-people"></i> Users</a></li>
+        <li><a routerLink="/cvs/new" routerLinkActive="active"><i class="bi bi-plus-circle"></i> Add CV</a></li>
+      </ul>
+    </nav>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <!-- Top Navbar -->
+    <header class="top-navbar">
+      <h1>📊 Dashboard</h1>
+      <div class="profile">
+        <span class="username">Welcome, Admin</span>
+        <button class="btn-logout">Logout</button>
+      </div>
+    </header>
+
+    <!-- Loading / Error -->
+    <div *ngIf="loading" class="loading">Loading dashboard...</div>
+    <div *ngIf="error" class="error">{{ error }}</div>
+
+    <!-- Summary Metrics -->
+    <div class="metrics-row">
+      <div class="card summary summary-blue">
+        <i class="bi bi-file-earmark-text card-icon"></i>
+        <h3>Total CVs</h3>
+        <p>{{ dashboard.total_cvs || cvs.length }}</p>
+      </div>
+      <div class="card summary summary-green">
+        <i class="bi bi-people card-icon"></i>
+        <h3>Total Users</h3>
+        <p>{{ dashboard.totalUsers || 0 }}</p>
+      </div>
+      <div class="card summary summary-orange">
+        <i class="bi bi-clock-history card-icon"></i>
+        <h3>Recent CVs</h3>
+        <p>{{ dashboard.recent?.length || 0 }}</p>
+      </div>
+    </div>
+
+    <!-- Top Skills -->
+    <section *ngIf="topSkills.length" class="analytics-section">
+      <h2>Top Skills</h2>
+      <div class="list-cards">
+        <div class="list-card" *ngFor="let skill of topSkills">
+          <span class="label">{{ skill.skill }}</span>
+          <span class="badge">{{ skill.count }}</span>
+          <div class="progress">
+            <div class="progress-bar" [style.width.%]="(skill.count / topSkills[0].count) * 100"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Top Locations -->
+    <section *ngIf="topLocations.length" class="analytics-section">
+      <h2>Top Locations</h2>
+      <div class="list-cards">
+        <div class="list-card" *ngFor="let loc of topLocations">
+          <i class="bi bi-geo-alt-fill"></i>
+          <span class="label">{{ loc.location }}</span>
+          <span class="badge">{{ loc.count }}</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Education -->
+    <section *ngIf="educationDistribution.length" class="analytics-section">
+      <h2>Education Distribution</h2>
+      <div class="list-cards">
+        <div class="list-card" *ngFor="let edu of educationDistribution">
+          <span class="label">{{ edu.degree }}</span>
+          <span class="badge">{{ edu.count }}</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Experience -->
+    <section class="analytics-section">
+      <h2>Experience Stats</h2>
+      <div class="metrics-row">
+        <div class="card summary summary-purple">
+          <h3>Min Years</h3>
+          <p>{{ experienceStats.min_years }}</p>
+        </div>
+        <div class="card summary summary-teal">
+          <h3>Max Years</h3>
+          <p>{{ experienceStats.max_years }}</p>
+        </div>
+        <div class="card summary summary-gray">
+          <h3>Avg Years</h3>
+          <p>{{ experienceStats.avg_years | number:'1.1-1' }}</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CV Table -->
+    <section *ngIf="cvs.length" class="cv-table card">
+      <h3>Candidate CVs</h3>
+      <div class="table-responsive">
+        <table>
+          <thead>
+            <tr>
+              <th><i class="bi bi-person"></i> Name</th>
+              <th><i class="bi bi-envelope"></i> Email</th>
+              <th><i class="bi bi-geo-alt"></i> Location</th>
+              <th><i class="bi bi-tools"></i> Skills</th>
+              <th><i class="bi bi-gear"></i> Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let cv of cvs">
+              <td>{{ cv.full_name }}</td>
+              <td>{{ cv.email }}</td>
+              <td>{{ cv.location }}</td>
+              <td>
+                <span *ngFor="let skill of cv.skills" class="skill-badge">{{ skill }}</span>
+              </td>
+              <td class="actions">
+                <button class="btn-view" (click)="viewCV(cv.id)" title="View CV"><i class="bi bi-eye"></i></button>
+                <button class="btn-edit" (click)="editCV(cv.id)" title="Edit CV"><i class="bi bi-pencil"></i></button>
+                <button class="btn-delete" (click)="deleteCV(cv.id)" title="Delete CV"><i class="bi bi-trash"></i></button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+</div>
